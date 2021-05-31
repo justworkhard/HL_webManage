@@ -18,7 +18,7 @@ function filterRouter(menuData: any, path: string) {
     if (item.path == path) {
       return true
     }
-    if (item.children.length) {
+    if (item.children && item.children.length) {
       if (filterRouter(item.children, path)) {
         return true
       }

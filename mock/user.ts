@@ -115,18 +115,22 @@ export default {
     },
   ],
   'POST /api/login/account': async (req: Request, res: Response) => {
-    const { password, username, type } = req.body;
+    const { password, userName, type } = req.body;
+    console.log(password, userName);
+
     await waitTime(2000);
-    if (password === 'ant.design' && username === 'admin') {
+    if (password === 'test' && userName === 'admin') {
       res.send({
         status: 'ok',
         type,
         currentAuthority: 'admin',
+        code: '1200',
+        data: {}
       });
       access = 'admin';
       return;
     }
-    if (password === 'ant.design' && username === 'user') {
+    if (password === 'ant.design' && userName === 'user') {
       res.send({
         status: 'ok',
         type,
@@ -155,6 +159,69 @@ export default {
   'GET /api/login/outLogin': (req: Request, res: Response) => {
     access = '';
     res.send({ data: {}, success: true });
+  },
+  'GET /api/getUserMenuList': (req: Request, res: Response) => {
+    access = '';
+    res.send({
+      code: 1200, data: [
+        {
+          name: 'login',
+          layout: false,
+          path: '/user/login',
+          hideInMenu: true,
+          component: './user/login',
+        },
+        {
+          path: '/account/updataPwd',
+          hideInMenu: true,
+          name: '修改密码',
+          component: './account/updataPwd',
+        },
+        {
+          path: '/',
+          component: './home',
+        },
+        {
+          name: '权限管理',
+          icon: 'icon-quanxian1',
+          path: '/AuthorityManagement',
+          routes: [
+            {
+              name: '用户管理',
+              icon: 'smile',
+              path: '/authoritymanagement/usermanagement',
+              component: './AuthorityManagement/UserManagement',
+              access: 'normalRouteFilter',
+            },
+            {
+              name: '角色管理',
+              icon: 'smile',
+              path: '/authoritymanagement/rolemanagement',
+              access: 'normalRouteFilter',
+              component: './AuthorityManagement/RoleManagement',
+            },
+            {
+              name: '分组管理',
+              icon: 'smile',
+              access: 'normalRouteFilter',
+              path: '/authoritymanagement/grouping',
+              component: './AuthorityManagement/GroupingManagement',
+            },
+            {
+              name: '菜单管理',
+              icon: 'smile',
+              access: 'normalRouteFilter',
+              path: '/authoritymanagement/menu',
+              component: './AuthorityManagement/MenuManagement',
+            },
+          ],
+        },
+
+        {
+          component: './404',
+        },
+      ], success: true
+    });
   },
   'POST /api/register': (req: Request, res: Response) => {
     res.send({ status: 'ok', currentAuthority: 'user', success: true });

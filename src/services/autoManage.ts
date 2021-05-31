@@ -1,6 +1,5 @@
-const baseUrl = ''
-const appCode = 'm-ms'
 import { request } from '../app'
+import { baseUrl, appCode } from './config'
 
 /**
  * 权限管理-查询用户列表 分页

@@ -1,6 +1,5 @@
 import request from 'umi-request';
-const baseUrl = ''
-const appCode = 'm-ms'
+import { baseUrl, appCode } from './config'
 
 export interface LoginParamsType {
   username: string;

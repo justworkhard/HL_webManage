@@ -158,6 +158,6 @@ export const request = extend({
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
   headers: {
-    Authorization: `Bearer ${JSON.parse(sessionStorage.getItem('userInfo')).token}`
+    // Authorization: `Bearer ${JSON.parse(sessionStorage.getItem('userInfo')).token}`
   }
 });

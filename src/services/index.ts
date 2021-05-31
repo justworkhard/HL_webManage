@@ -1,7 +1,6 @@
 // import { request } from 'umi';
 import request from 'umi-request';
-const baseUrl = ''
-const appCode = 'm-ms'
+import { baseUrl, appCode } from './config'
 
 export async function getMenuList(params: any) {
     params = {
